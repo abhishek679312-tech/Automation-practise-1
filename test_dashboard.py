@@ -4,15 +4,6 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
-@pytest.fixture
-def setup_driver():
-    driver=webdriver.Chrome()
-    driver.maximize_window()
-
-    yield driver
-
-    driver.quit()
-
 def test_saucedemo_login(setup_driver):
     driver=setup_driver
     driver.get("https://www.saucedemo.com")

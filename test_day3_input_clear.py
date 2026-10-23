@@ -5,15 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import pytest 
 
-@pytest.fixture
-def driver():
-    options=webdriver.ChromeOptions()
-    options.add_argument("--start-maximized")
-    driver_instance=webdriver.Chrome(options=options)
-    yield driver_instance 
-
-    driver_instance.quit()
-
 def test_input_type(driver):
     wait=WebDriverWait(driver,10)
     driver.get("https://www.saucedemo.com")
