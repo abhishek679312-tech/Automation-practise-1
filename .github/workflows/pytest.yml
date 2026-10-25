@@ -15,11 +15,6 @@ jobs:
         with:
           python-version: "3.11"
 
-      - uses: browser-actions/setup-chrome@v1
-        with:
-          chrome-version: stable
-          install-chromedriver: true
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip

@@ -55,6 +55,6 @@ def pytest_runtest_makereport(item, call):
     outcome = yield
     report = outcome.get_result()
     if report.when == "call" and report.failed:
-        drv = item.funcargs.get("logged_in_driver") or item.funcargs.get("driver")
+        drv = item.funcargs.get("logged_in_driver") or item.funcargs.get("driver") or item.funcargs.get("setup_driver")
         if drv:
             drv.save_screenshot("failure.png")   
