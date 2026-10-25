@@ -32,8 +32,8 @@ def driver(setup_driver):
 @pytest.fixture
 def logged_in_driver():
     options = get_chrome_options()
+    options.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=options)
-    driver.maximize_window()
     driver.get("https://www.saucedemo.com")
     wait = WebDriverWait(driver, 10)
     wait.until(EC.visibility_of_element_located((By.ID, "user-name"))).send_keys("standard_user")
