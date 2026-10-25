@@ -13,6 +13,13 @@ def get_chrome_options():
     options.add_argument("--disable-gpu")
     options.add_argument("--disable-software-rasterizer")
     options.add_argument("--window-size=1920,1080")
+    options.add_argument("--incognito")
+    options.add_argument("--disable-features=PasswordLeakDetection,PasswordCheck")
+    options.add_experimental_option("prefs", {
+        "credentials_enable_service": False,
+        "profile.password_manager_enabled": False,
+        "profile.password_manager_leak_detection": False,
+    })
     return options
 
 # 1. Base clean browser (for login tests, negative tests, etc.)
