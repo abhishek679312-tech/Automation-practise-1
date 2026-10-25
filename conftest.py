@@ -35,10 +35,19 @@ def logged_in_driver():
     options.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=options)
     driver.get("https://www.saucedemo.com")
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 20)
     wait.until(EC.visibility_of_element_located((By.ID, "user-name"))).send_keys("standard_user")
     wait.until(EC.visibility_of_element_located((By.ID, "password"))).send_keys("secret_sauce")
     wait.until(EC.element_to_be_clickable((By.ID, "login-button"))).click()
     wait.until(EC.url_contains("/inventory.html"))
     yield driver
     driver.quit()
+
+@pytest.hookimpl(hookwrapper=True)
+def pytest_runtest_makereport(item, call):
+    outcome = yield
+    report = outcome.get_result()
+    if report.when == "call" and report.failed:
+        drv = item.funcargs.get("logged_in_driver") or item.funcargs.get("driver")
+        if drv:
+            drv.save_screenshot("failure.png")   

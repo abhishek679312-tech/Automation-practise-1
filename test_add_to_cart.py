@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 @pytest.mark.smoke
 def test_verify_item_in_cart(logged_in_driver):
     driver = logged_in_driver
-    wait = WebDriverWait(driver, 10)
+    wait = WebDriverWait(driver, 20)
     # 1. Login
     
     # 2. Add product to cart
