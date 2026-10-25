@@ -39,7 +39,6 @@ def driver(setup_driver):
 @pytest.fixture
 def logged_in_driver():
     options = get_chrome_options()
-    options.add_argument("--remote-debugging-port=9222")
     driver = webdriver.Chrome(options=options)
     driver.get("https://www.saucedemo.com")
     wait = WebDriverWait(driver, 20)
@@ -47,6 +46,7 @@ def logged_in_driver():
     wait.until(EC.visibility_of_element_located((By.ID, "password"))).send_keys("secret_sauce")
     wait.until(EC.element_to_be_clickable((By.ID, "login-button"))).click()
     wait.until(EC.url_contains("/inventory.html"))
+    wait.until(EC.visibility_of_element_located((By.CLASS_NAME, "inventory_list")))
     yield driver
     driver.quit()
 
